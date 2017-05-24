@@ -1,3 +1,3 @@
 # RxSwiftMVVMWordFriend
-Test for RxSwift, MVVM, Unit test
+Test for RxSwift, MVVM, Unit test  
 Under construction...
