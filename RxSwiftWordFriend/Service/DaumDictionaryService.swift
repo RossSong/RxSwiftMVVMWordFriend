@@ -36,9 +36,11 @@ class DaumDictionaryService : NSObject, XMLParserDelegate, DictionaryService {
                     let array = parser?.search(withXPathQuery: stringQuery)
                     
                     let meaning = self.getMeaning(array as! [TFHppleElement])
-                    let model = WordSearchResult()
-                    model.meaning = meaning
-                    self.delegate?.updateModel(model)
+                    
+                    let voca = Vocabulary()
+                    voca.word = word
+                    voca.meaning = meaning
+                    self.delegate?.updateModel(voca)
                 }
             }
         }

@@ -42,7 +42,8 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.setupArrayImageViewsAndConstraints()
-        self.searchViewModel = SearchViewModel(dicService: DaumDictionaryService(), imageService: GoogleImageSearchService())
+        
+        self.searchViewModel = SearchViewModel(dicService: DaumDictionaryService(), imageService: GoogleImageSearchService(), dbManager: RealmDataManager.shared)
         if let viewModel = self.searchViewModel{
             addBindsToViewModel(viewModel)
         }

@@ -1,5 +1,5 @@
 //
-//  WordSearchResult.swift
+//  DataManager.swift
 //  RxSwiftWordFriend
 //
 //  Created by RossSong on 2017. 5. 25..
@@ -8,6 +8,7 @@
 
 import Foundation
 
-class WordSearchResult {
-    var meaning: String?
+protocol DataManager {
+    func addWord(_ voca:Vocabulary)
+    func readWordList () -> Array<Vocabulary>?
 }

@@ -12,7 +12,7 @@ import RxSwift
 import Alamofire
 
 protocol SearchViewModelDelegate {
-    func updateModel(_ model:WordSearchResult)
+    func updateModel(_ model:Vocabulary)
     func setupImage(_ image:UIImage, index:Int)
 }
 
@@ -20,6 +20,7 @@ class SearchViewModel : SearchViewModelDelegate {
     
     var dictionaryService : DictionaryService
     var imageSearchService : ImageSearchService
+    var dataManager : DataManager
     
     var searchWord: Variable<String>
     var imageFirst: Variable<UIImage>
@@ -29,7 +30,7 @@ class SearchViewModel : SearchViewModelDelegate {
     
     var images = [Variable<UIImage>]()
     
-    init?(dicService: DictionaryService, imageService: ImageSearchService) {
+    init?(dicService: DictionaryService, imageService: ImageSearchService, dbManager: DataManager) {
         self.searchWord = Variable<String>("")
         self.imageFirst = Variable<UIImage>(UIImage())
         self.imageSecond = Variable<UIImage>(UIImage())
@@ -37,6 +38,7 @@ class SearchViewModel : SearchViewModelDelegate {
         self.meaning = Variable<String>("")
         self.dictionaryService = dicService
         self.imageSearchService = imageService
+        self.dataManager = dbManager
         self.dictionaryService.setTargetViewModel(self)
         self.imageSearchService.setTargetViewModel(self)
         
@@ -57,9 +59,9 @@ class SearchViewModel : SearchViewModelDelegate {
         self.imageSearchService.getImagesFromServer(self.searchWord.value)
     }
     
-    func updateModel(_ model:WordSearchResult) {
-        guard let meaning = model.meaning else { return }
-        self.meaning.value = meaning
+    func updateModel(_ model:Vocabulary) {
+        self.meaning.value = model.meaning
+        self.dataManager.addWord(model)
     }
     
     func setupImage(_ image:UIImage, index:Int) {

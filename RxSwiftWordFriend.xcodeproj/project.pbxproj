@@ -13,6 +13,8 @@
 		910C331F1ED4509C0005BFA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 910C331E1ED4509C0005BFA7 /* Assets.xcassets */; };
 		910C33221ED4509C0005BFA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 910C33201ED4509C0005BFA7 /* LaunchScreen.storyboard */; };
 		910C332D1ED4509C0005BFA7 /* RxSwiftWordFriendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910C332C1ED4509C0005BFA7 /* RxSwiftWordFriendTests.swift */; };
+		912396E41ED69F5E0068F374 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912396E31ED69F5E0068F374 /* DataManager.swift */; };
+		912396E61ED69FA90068F374 /* RealmDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912396E51ED69FA90068F374 /* RealmDataManager.swift */; };
 		91A219E51ED5BAEB009FF41F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219E41ED5BAEB009FF41F /* ListViewController.swift */; };
 		91A219E81ED5BB43009FF41F /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219E71ED5BB43009FF41F /* QuizViewController.swift */; };
 		91A219EA1ED5BB53009FF41F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219E91ED5BB53009FF41F /* SearchViewController.swift */; };
@@ -26,7 +28,6 @@
 		91A21A0A1ED5DFAF009FF41F /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A21A061ED5DFAF009FF41F /* TFHppleElement.m */; };
 		91A21A0B1ED5DFAF009FF41F /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A21A081ED5DFAF009FF41F /* XPathQuery.m */; };
 		91A21A0F1ED5E01A009FF41F /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 91A21A0E1ED5E01A009FF41F /* libxml2.tbd */; };
-		91A21A151ED5E430009FF41F /* WordSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A21A141ED5E430009FF41F /* WordSearchResult.swift */; };
 		91A21A181ED5E441009FF41F /* ImageSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A21A161ED5E441009FF41F /* ImageSearchService.swift */; };
 		91A21A191ED5E441009FF41F /* GoogleImageSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A21A171ED5E441009FF41F /* GoogleImageSearchService.swift */; };
 		91A21A1B1ED5F01F009FF41F /* SearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A21A1A1ED5F01F009FF41F /* SearchViewModelTests.swift */; };
@@ -57,6 +58,8 @@
 		910C33281ED4509C0005BFA7 /* RxSwiftWordFriendTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxSwiftWordFriendTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		910C332C1ED4509C0005BFA7 /* RxSwiftWordFriendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSwiftWordFriendTests.swift; sourceTree = "<group>"; };
 		910C332E1ED4509C0005BFA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		912396E31ED69F5E0068F374 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataManager.swift; path = Service/DataManager.swift; sourceTree = "<group>"; };
+		912396E51ED69FA90068F374 /* RealmDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmDataManager.swift; path = Service/RealmDataManager.swift; sourceTree = "<group>"; };
 		91A219E41ED5BAEB009FF41F /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListViewController.swift; path = ViewController/ListViewController.swift; sourceTree = "<group>"; };
 		91A219E71ED5BB43009FF41F /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizViewController.swift; path = ViewController/QuizViewController.swift; sourceTree = "<group>"; };
 		91A219E91ED5BB53009FF41F /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = ViewController/SearchViewController.swift; sourceTree = "<group>"; };
@@ -75,7 +78,6 @@
 		91A21A081ED5DFAF009FF41F /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XPathQuery.m; path = RxSwiftWordFriend/Hpple/XPathQuery.m; sourceTree = "<group>"; };
 		91A21A0C1ED5DFF2009FF41F /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		91A21A0E1ED5E01A009FF41F /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
-		91A21A141ED5E430009FF41F /* WordSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WordSearchResult.swift; path = Model/WordSearchResult.swift; sourceTree = "<group>"; };
 		91A21A161ED5E441009FF41F /* ImageSearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageSearchService.swift; path = Service/ImageSearchService.swift; sourceTree = "<group>"; };
 		91A21A171ED5E441009FF41F /* GoogleImageSearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleImageSearchService.swift; path = Service/GoogleImageSearchService.swift; sourceTree = "<group>"; };
 		91A21A1A1ED5F01F009FF41F /* SearchViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModelTests.swift; sourceTree = "<group>"; };
@@ -185,7 +187,6 @@
 		91A219EC1ED5BCB4009FF41F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				91A21A141ED5E430009FF41F /* WordSearchResult.swift */,
 				91A219F61ED5BD84009FF41F /* Vacabulary.swift */,
 			);
 			name = Model;
@@ -198,6 +199,8 @@
 				91A21A171ED5E441009FF41F /* GoogleImageSearchService.swift */,
 				91A219F81ED5BDCE009FF41F /* DaumDictionaryService.swift */,
 				91A219FB1ED5D9C5009FF41F /* DictionaryService.swift */,
+				912396E31ED69F5E0068F374 /* DataManager.swift */,
+				912396E51ED69FA90068F374 /* RealmDataManager.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -439,8 +442,8 @@
 				91A219F51ED5BD55009FF41F /* ListViewModel.swift in Sources */,
 				91A219F31ED5BD2B009FF41F /* QuizViewModel.swift in Sources */,
 				910C33181ED4509C0005BFA7 /* AppDelegate.swift in Sources */,
-				91A21A151ED5E430009FF41F /* WordSearchResult.swift in Sources */,
 				91A219F71ED5BD84009FF41F /* Vacabulary.swift in Sources */,
+				912396E41ED69F5E0068F374 /* DataManager.swift in Sources */,
 				91A21A0B1ED5DFAF009FF41F /* XPathQuery.m in Sources */,
 				91A21A181ED5E441009FF41F /* ImageSearchService.swift in Sources */,
 				91A21A091ED5DFAF009FF41F /* TFHpple.m in Sources */,
@@ -448,6 +451,7 @@
 				91A219FC1ED5D9C5009FF41F /* DictionaryService.swift in Sources */,
 				91A219EA1ED5BB53009FF41F /* SearchViewController.swift in Sources */,
 				91A219E51ED5BAEB009FF41F /* ListViewController.swift in Sources */,
+				912396E61ED69FA90068F374 /* RealmDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

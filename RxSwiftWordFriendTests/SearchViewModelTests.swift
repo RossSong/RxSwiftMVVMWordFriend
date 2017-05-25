@@ -9,17 +9,35 @@
 import XCTest
 @testable import RxSwiftWordFriend
 
+class MockDataManager : DataManager {
+    var ret = Array<Vocabulary>()
+    
+    func addWord(_ voca:Vocabulary) {
+        ret.append(voca)
+    }
+    
+    func readWordList () -> Array<Vocabulary>? {
+        return ret
+    }
+}
+
 class MockDictionaryService : DictionaryService {
     var delegate : SearchViewModelDelegate?
+    var dataManager : DataManager?
+    
+    required init? (_ dbManager: DataManager) {
+        self.dataManager = dbManager
+    }
     
     func setTargetViewModel(_ viewModel:SearchViewModelDelegate) {
         self.delegate = viewModel
     }
     
     func getMeaningFromServer(_ word:String) {
-        let model = WordSearchResult()
+        let model = Vocabulary()
         
         if "TEST" == word {
+            model.word = "TEST"
             model.meaning = "ABC"
         }
         
@@ -45,8 +63,9 @@ class SearchViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        self.searchViewModel = SearchViewModel(dicService: MockDictionaryService(), imageService: MockImageSearchService())
-        
+        if let dataManager = MockDictionaryService(MockDataManager()) {
+            self.searchViewModel = SearchViewModel(dicService: dataManager, imageService: MockImageSearchService(), dbManager: MockDataManager())
+        }
     }
     
     override func tearDown() {
@@ -70,6 +89,20 @@ class SearchViewModelTests: XCTestCase {
         self.searchViewModel?.searchWord.value = "TEST"
         self.searchViewModel?.doSearchWord()
         XCTAssert("ABC" == self.searchViewModel?.meaning.value)
+    }
+    
+    func testDoSearchWord2() {
+        if let viewModel = self.searchViewModel {
+            viewModel.searchWord.value = "TEST"
+            viewModel.doSearchWord()
+            let list = viewModel.dataManager.readWordList()
+            XCTAssert(nil != list)
+            
+            let wordList = list!
+            XCTAssert(1 == wordList.count)
+            XCTAssert(wordList[0].word == "TEST")
+            XCTAssert(wordList[0].meaning == "ABC")
+        }
     }
     
 }
