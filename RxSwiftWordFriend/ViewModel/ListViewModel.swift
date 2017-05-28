@@ -7,7 +7,25 @@
 //
 
 import Foundation
+import UIKit
+import RealmSwift
+import RxSwift
 
 class ListViewModel {
-    //TODO:
+    var wordList : Variable<[Vocabulary]>?
+    var dataManager : DataManager?
+    
+    init?(dbManager: DataManager) {
+        self.dataManager = dbManager
+        if let list = dbManager.readWordList() {
+            self.wordList = Variable<[Vocabulary]>(list)
+        }
+    }
+    
+    func deleteWord(index:Int) {
+        guard let manager = self.dataManager else { return }
+        guard let list = manager.deleteWord(index:index) else { return }
+        self.wordList?.value = list
+    }
 }
+

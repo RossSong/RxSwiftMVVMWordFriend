@@ -235,7 +235,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="clickBackButton:" destination="Lpt-LJ-DEI" eventType="touchUpInside" id="BW5-O7-Kgf"/>
+                                    <action selector="buttonBackTapped:" destination="Lpt-LJ-DEI" eventType="touchUpInside" id="DmG-nN-AS6"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dhH-xO-BZp">

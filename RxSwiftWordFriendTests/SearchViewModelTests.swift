@@ -9,42 +9,6 @@
 import XCTest
 @testable import RxSwiftWordFriend
 
-class MockDataManager : DataManager {
-    var ret = Array<Vocabulary>()
-    
-    func addWord(_ voca:Vocabulary) {
-        ret.append(voca)
-    }
-    
-    func readWordList () -> Array<Vocabulary>? {
-        return ret
-    }
-}
-
-class MockDictionaryService : DictionaryService {
-    var delegate : SearchViewModelDelegate?
-    var dataManager : DataManager?
-    
-    required init? (_ dbManager: DataManager) {
-        self.dataManager = dbManager
-    }
-    
-    func setTargetViewModel(_ viewModel:SearchViewModelDelegate) {
-        self.delegate = viewModel
-    }
-    
-    func getMeaningFromServer(_ word:String) {
-        let model = Vocabulary()
-        
-        if "TEST" == word {
-            model.word = "TEST"
-            model.meaning = "ABC"
-        }
-        
-        self.delegate?.updateModel(model)
-    }
-}
-
 class MockImageSearchService : ImageSearchService {
     var delegate : SearchViewModelDelegate?
     

@@ -114,6 +114,10 @@ class SearchViewController: UIViewController {
         self.arrayImageViews[index].image = newImage
         self.arrayImageViewHeightConstraints[index].constant = CGFloat(newHeight);
     }
-
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        guard let viewModel = self.searchViewModel else { return false }
+        return viewModel.shouldPerformSegue(withIdentifier: identifier, sender: sender)
+    }
 }
 

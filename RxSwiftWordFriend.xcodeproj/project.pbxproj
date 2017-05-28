@@ -15,6 +15,8 @@
 		910C332D1ED4509C0005BFA7 /* RxSwiftWordFriendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910C332C1ED4509C0005BFA7 /* RxSwiftWordFriendTests.swift */; };
 		912396E41ED69F5E0068F374 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912396E31ED69F5E0068F374 /* DataManager.swift */; };
 		912396E61ED69FA90068F374 /* RealmDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912396E51ED69FA90068F374 /* RealmDataManager.swift */; };
+		912C4BC31EDAF3DB00942AA2 /* MockObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912C4BC21EDAF3DB00942AA2 /* MockObjects.swift */; };
+		912C4BC51EDAF43200942AA2 /* ListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912C4BC41EDAF43200942AA2 /* ListViewModelTests.swift */; };
 		91A219E51ED5BAEB009FF41F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219E41ED5BAEB009FF41F /* ListViewController.swift */; };
 		91A219E81ED5BB43009FF41F /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219E71ED5BB43009FF41F /* QuizViewController.swift */; };
 		91A219EA1ED5BB53009FF41F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219E91ED5BB53009FF41F /* SearchViewController.swift */; };
@@ -60,6 +62,8 @@
 		910C332E1ED4509C0005BFA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		912396E31ED69F5E0068F374 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataManager.swift; path = Service/DataManager.swift; sourceTree = "<group>"; };
 		912396E51ED69FA90068F374 /* RealmDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmDataManager.swift; path = Service/RealmDataManager.swift; sourceTree = "<group>"; };
+		912C4BC21EDAF3DB00942AA2 /* MockObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockObjects.swift; sourceTree = "<group>"; };
+		912C4BC41EDAF43200942AA2 /* ListViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModelTests.swift; sourceTree = "<group>"; };
 		91A219E41ED5BAEB009FF41F /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListViewController.swift; path = ViewController/ListViewController.swift; sourceTree = "<group>"; };
 		91A219E71ED5BB43009FF41F /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizViewController.swift; path = ViewController/QuizViewController.swift; sourceTree = "<group>"; };
 		91A219E91ED5BB53009FF41F /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = ViewController/SearchViewController.swift; sourceTree = "<group>"; };
@@ -157,8 +161,10 @@
 		910C332B1ED4509C0005BFA7 /* RxSwiftWordFriendTests */ = {
 			isa = PBXGroup;
 			children = (
+				912C4BC21EDAF3DB00942AA2 /* MockObjects.swift */,
 				910C332C1ED4509C0005BFA7 /* RxSwiftWordFriendTests.swift */,
 				91A21A1A1ED5F01F009FF41F /* SearchViewModelTests.swift */,
+				912C4BC41EDAF43200942AA2 /* ListViewModelTests.swift */,
 				910C332E1ED4509C0005BFA7 /* Info.plist */,
 			);
 			path = RxSwiftWordFriendTests;
@@ -460,6 +466,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				91A21A1B1ED5F01F009FF41F /* SearchViewModelTests.swift in Sources */,
+				912C4BC31EDAF3DB00942AA2 /* MockObjects.swift in Sources */,
+				912C4BC51EDAF43200942AA2 /* ListViewModelTests.swift in Sources */,
 				910C332D1ED4509C0005BFA7 /* RxSwiftWordFriendTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

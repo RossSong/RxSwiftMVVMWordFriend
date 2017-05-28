@@ -37,4 +37,20 @@ class RealmDataManager : DataManager {
         let wordList = Array(manager.objects(Vocabulary.self))
         return wordList
     }
+    
+    func deleteWord(index:Int) -> Array<Vocabulary>? {
+        guard let list = self.readWordList() else { return nil }
+        guard index < list.count else { return nil }
+        let itemToBeDeleted = list[index]
+        do {
+            try self.realm?.write {
+                realm?.delete(itemToBeDeleted)
+            }
+        }
+        catch let error as NSError {
+            print("Error: \(error.localizedDescription)")
+        }
+        
+        return self.readWordList()
+    }
 }

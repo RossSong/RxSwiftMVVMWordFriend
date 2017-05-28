@@ -11,4 +11,5 @@ import Foundation
 protocol DataManager {
     func addWord(_ voca:Vocabulary)
     func readWordList () -> Array<Vocabulary>?
+    func deleteWord(index:Int) -> Array<Vocabulary>?
 }

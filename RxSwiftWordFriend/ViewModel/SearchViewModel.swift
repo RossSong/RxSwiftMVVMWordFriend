@@ -68,4 +68,14 @@ class SearchViewModel : SearchViewModelDelegate {
         guard  self.images.count > index else { return }
         self.images[index].value = image
     }
+    
+    func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        guard let wordList = self.dataManager.readWordList() else { return false }
+        
+        if 0 == wordList.count && "gotoQuiz" == identifier {
+            return false
+        }
+        
+        return true
+    }
 }
