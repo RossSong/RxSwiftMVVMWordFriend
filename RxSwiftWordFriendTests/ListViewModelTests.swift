@@ -66,4 +66,14 @@ class ListViewModelTests: XCTestCase {
         XCTAssert("TEST2" == vocaRet.word && "TEST2_Meaning" == vocaRet.meaning)
     }
     
+    func testButtonEditPressed() {
+        listViewModel?.isTableViewEditing.value = false
+        listViewModel?.action.onNext(.buttonEditTapped)
+        XCTAssert(true == listViewModel?.isTableViewEditing.value)
+        XCTAssert("Edit" == listViewModel?.titleOfButtonEdit.value)
+        
+        listViewModel?.action.onNext(.buttonEditTapped)
+        XCTAssert(false == listViewModel?.isTableViewEditing.value)
+        XCTAssert("Done" == listViewModel?.titleOfButtonEdit.value)
+    }
 }

@@ -29,6 +29,24 @@ class ListViewController: UIViewController {
         setupViewModel()
         setupCellConfiguration()
         setupCellOnDelete()
+        bind()
+    }
+    
+    func bindTitleOfButtonEdit() {
+        viewModel?.titleOfButtonEdit.asObservable().subscribe(onNext: { [weak self] value in
+            self?.buttonEdit.setTitle(value, for: UIControlState.normal)
+        }).disposed(by: disposeBag)
+    }
+    
+    func bindIsTableViewEditing() {
+        viewModel?.isTableViewEditing.asObservable().subscribe(onNext: { [weak self] value in
+            self?.tableView.setEditing(value, animated: true)
+        }).disposed(by: disposeBag)
+    }
+    
+    func bind() {
+        bindIsTableViewEditing()
+        bindTitleOfButtonEdit()
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,7 +54,6 @@ class ListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 
@@ -63,20 +80,12 @@ class ListViewController: UIViewController {
     }
     
     func setupCellOnDelete() {
-        self.tableView.rx.itemDeleted.subscribe(onNext: {[unowned self] indexPath in
-            guard let listViewModel = self.viewModel else { return }
-            listViewModel.deleteWord(index:indexPath.row)
+        self.tableView.rx.itemDeleted.subscribe(onNext: {[weak self] indexPath in
+            self?.viewModel?.action.onNext(.deleteItem(index: indexPath.row))
         }).addDisposableTo(disposeBag)
     }
     
     @IBAction func buttonEditTapped(_ sender: Any) {
-        if tableView.isEditing {
-            tableView.setEditing(false, animated: true)
-            buttonEdit.setTitle("Edit", for: UIControlState.normal)
-        }
-        else {
-            tableView.setEditing(true, animated: true)
-            buttonEdit.setTitle("Done", for: UIControlState.normal)
-        }
+        viewModel?.action.onNext(.buttonEditTapped)
     }
 }
