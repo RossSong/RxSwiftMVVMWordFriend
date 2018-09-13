@@ -7,13 +7,29 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class QuizViewController: UIViewController {
-
+    let disposeBag = DisposeBag()
+    
+    @IBOutlet weak var buttonBack: UIButton!
+    @IBOutlet weak var labelWord: UILabel!
+    @IBOutlet weak var buttonLeft: UIButton!
+    @IBOutlet weak var buttonRight: UIButton!
+    
+    func bind() {
+        self.buttonBack.rx.tap.subscribe(onNext: { _ in
+            debugPrint("buttonBadk is tapped")
+            self.dismiss(animated: true, completion: nil)
+        }).disposed(by: disposeBag)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        bind()
     }
 
     override func didReceiveMemoryWarning() {

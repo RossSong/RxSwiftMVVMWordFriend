@@ -17,24 +17,29 @@ protocol SearchViewModelDelegate {
 }
 
 class SearchViewModel : SearchViewModelDelegate {
-    
+    var widthOfImageView: CGFloat = 0
     var dictionaryService : DictionaryService
     var imageSearchService : ImageSearchService
     var dataManager : DataManager
     
     var searchWord: Variable<String>
-    var imageFirst: Variable<UIImage>
-    var imageSecond: Variable<UIImage>
-    var imageThird: Variable<UIImage>
+    var imageFirst: Variable<(image: UIImage, height: CGFloat)>
+    var imageSecond: Variable<(image: UIImage, height: CGFloat)>
+    var imageThird: Variable<(image: UIImage, height: CGFloat)>
     var meaning: Variable<String>
     
-    var images = [Variable<UIImage>]()
+    var images = [Variable<(image: UIImage, height: CGFloat)>]()
+    let buttonListPressed = PublishSubject<Void>()
+    let buttonQuizPressed = PublishSubject<Void>()
+    let shouldGoToQuizViewController = PublishSubject<Void>()
+    let shouldGoToListViewController = PublishSubject<Void>()
     
-    init?(dicService: DictionaryService, imageService: ImageSearchService, dbManager: DataManager) {
+    init?(dicService: DictionaryService, imageService: ImageSearchService, dbManager: DataManager, widthOfImageView: CGFloat) {
+        self.widthOfImageView = widthOfImageView
         self.searchWord = Variable<String>("")
-        self.imageFirst = Variable<UIImage>(UIImage())
-        self.imageSecond = Variable<UIImage>(UIImage())
-        self.imageThird = Variable<UIImage>(UIImage())
+        self.imageFirst = Variable<(image: UIImage, height: CGFloat)>(image: UIImage(), height: 0)
+        self.imageSecond = Variable<(image: UIImage, height: CGFloat)>(image: UIImage(), height: 0)
+        self.imageThird = Variable<(image: UIImage, height: CGFloat)>(image: UIImage(), height: 0)
         self.meaning = Variable<String>("")
         self.dictionaryService = dicService
         self.imageSearchService = imageService
@@ -43,14 +48,29 @@ class SearchViewModel : SearchViewModelDelegate {
         self.imageSearchService.setTargetViewModel(self)
         
         self.images = [self.imageFirst, self.imageSecond, self.imageThird]
+        
+        setupEventsHandler()
+    }
+    
+    func setupButtonListPressedEventsHandler() {
+        _ = self.buttonListPressed.subscribe(onNext: { [weak self] _ in
+            self?.shouldGoToListViewController.onNext()
+        })
+    }
+    
+    func setupButtonQuizPressedEventsHandler() {
+        _ = self.buttonQuizPressed.subscribe(onNext: { [weak self] _ in
+            self?.shouldGoToQuizViewController.onNext()
+        })
+    }
+    
+    func setupEventsHandler() {
+        setupButtonListPressedEventsHandler()
+        setupButtonQuizPressedEventsHandler()
     }
     
     func showList() {
         debugPrint("TODO: show ListViewController!")
-    }
-    
-    func showQuiz() {
-        debugPrint("TODO: show QuizViewController!")
     }
     
     func doSearchWord() {
@@ -66,7 +86,8 @@ class SearchViewModel : SearchViewModelDelegate {
     
     func setupImage(_ image:UIImage, index:Int) {
         guard  self.images.count > index else { return }
-        self.images[index].value = image
+        let height = getHeight(image: image)
+        self.images[index].value = (image: image, height: height)
     }
     
     func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -77,5 +98,15 @@ class SearchViewModel : SearchViewModelDelegate {
         }
         
         return true
+    }
+    
+    func getHeight(image:UIImage?) -> CGFloat {
+        guard let newImage = image else { return 0 }
+        guard 0 != newImage.size.height else { return 0 }
+        guard 0 != newImage.size.width else { return 0 }
+        let height = newImage.size.height
+        let width = newImage.size.width
+        let newHeight = height/width * widthOfImageView
+        return CGFloat(newHeight);
     }
 }

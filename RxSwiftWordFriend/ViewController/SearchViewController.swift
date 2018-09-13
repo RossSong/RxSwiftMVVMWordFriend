@@ -35,15 +35,10 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var constraintHeightOfSecondImageView: NSLayoutConstraint!
     @IBOutlet weak var constraintHeightOfThirdImageView: NSLayoutConstraint!
     
-    var arrayImageViews : [UIImageView]!
-    var arrayImageViewHeightConstraints : [NSLayoutConstraint]!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.setupArrayImageViewsAndConstraints()
-        
-        self.searchViewModel = SearchViewModel(dicService: DaumDictionaryService(), imageService: GoogleImageSearchService(), dbManager: RealmDataManager.shared)
+        self.searchViewModel = SearchViewModel(dicService: DaumDictionaryService(), imageService: GoogleImageSearchService(), dbManager: RealmDataManager.shared, widthOfImageView: imageViewFirst.frame.size.width)
         if let viewModel = self.searchViewModel{
             addBindsToViewModel(viewModel)
         }
@@ -53,45 +48,13 @@ class SearchViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    fileprivate func setupArrayImageViewsAndConstraints() {
-        self.arrayImageViews = [self.imageViewFirst, self.imageViewSecond, self.imageViewThird]
-        self.arrayImageViewHeightConstraints = [self.constraintHeightOfFirstImageView, self.constraintHeightOfSecondImageView, self.constraintHeightOfThirdImageView]
+
+    func bindTextFieldSearchInput(_ viewModel: SearchViewModel) {
+        self.textFieldSearch.rx.text.orEmpty.throttle(throttleInterval, scheduler: MainScheduler.instance)
+            .bind(to:viewModel.searchWord).addDisposableTo(disposeBag)
     }
     
-    fileprivate func addBindsToViewModel(_ viewModel: SearchViewModel) {
-        self.textFieldSearch.rx.text.orEmpty.throttle(throttleInterval, scheduler: MainScheduler.instance)
-        .bind(to:viewModel.searchWord).addDisposableTo(disposeBag)
-//        viewModel.imageFirst.asObservable().bind(to: self.imageViewFirst.rx.image).addDisposableTo(disposeBag)
-//        viewModel.imageSecond.asObservable().bind(to: self.imageViewSecond.rx.image).addDisposableTo(disposeBag)
-//        viewModel.imageThird.asObservable().bind(to: self.imageViewThird.rx.image).addDisposableTo(disposeBag)
-        viewModel.imageFirst.asObservable().subscribe(onNext: { [unowned self] image in
-            self.imageSizeFit(0,image: image)
-        }).addDisposableTo(disposeBag)
-        
-        viewModel.imageSecond.asObservable().subscribe(onNext: { [unowned self] image in
-            self.imageSizeFit(1,image: image)
-        }).addDisposableTo(disposeBag)
-        
-        viewModel.imageThird.asObservable().subscribe(onNext: { [unowned self] image in
-            self.imageSizeFit(2,image: image)
-        }).addDisposableTo(disposeBag)
-        
-        
-        viewModel.meaning.asObservable().bind(to: self.labelMeaing.rx.text).addDisposableTo(disposeBag)
-        
-        self.buttonList.rx.tap.subscribe(onNext: { [unowned self] _ in
-            print("buttonList tapped")
-            self.searchViewModel?.showList()
-        })
-            .addDisposableTo(disposeBag)
-        
-        self.buttonQuiz.rx.tap.subscribe(onNext: { [unowned self] _ in
-            print("buttonQuiz tapped")
-            self.searchViewModel?.showQuiz()
-        })
-            .addDisposableTo(disposeBag)
-        
+    func bindTextFieldSearchEndEditing() {
         self.textFieldSearch.rx.controlEvent([.editingDidEndOnExit])
             .asObservable()
             .subscribe(onNext: { _ in
@@ -101,20 +64,83 @@ class SearchViewController: UIViewController {
             })
             .addDisposableTo(disposeBag)
     }
-
-    func imageSizeFit(_ index:Int, image:UIImage?) {
-        guard let newImage = image else { return }
-        guard self.arrayImageViews.count > index else { return }
-        guard 0 != newImage.size.height else { return }
-        guard 0 != newImage.size.width else { return }
-        let height = newImage.size.height
-        let width = newImage.size.width
-        let newHeight = height/width * self.arrayImageViews[index].frame.size.width
-        
-        self.arrayImageViews[index].image = newImage
-        self.arrayImageViewHeightConstraints[index].constant = CGFloat(newHeight);
+    
+    func setupImageView(_ imageView: UIImageView?, image: UIImage?, heightConstraint: NSLayoutConstraint?, height: CGFloat) {
+        imageView?.image = image
+        heightConstraint?.constant = height
     }
     
+    func bindImageFirst(_ viewModel: SearchViewModel) {
+        viewModel.imageFirst.asObservable().subscribe(onNext: { [weak self] (image, height) in
+            self?.setupImageView(self?.imageViewFirst, image: image, heightConstraint: self?.constraintHeightOfFirstImageView, height: height)
+        }).addDisposableTo(disposeBag)
+    }
+    
+    func bindImageSecond(_ viewModel: SearchViewModel) {
+        viewModel.imageSecond.asObservable().subscribe(onNext: { [weak self] (image, height) in
+            self?.setupImageView(self?.imageViewSecond, image: image, heightConstraint: self?.constraintHeightOfSecondImageView, height: height)
+        }).addDisposableTo(disposeBag)
+    }
+    
+    func bindImageThird(_ viewModel: SearchViewModel) {
+        viewModel.imageThird.asObservable().subscribe(onNext: { [weak self] (image, height) in
+            self?.setupImageView(self?.imageViewThird, image: image, heightConstraint: self?.constraintHeightOfThirdImageView, height: height)
+        }).addDisposableTo(disposeBag)
+    }
+    
+    func bindMeaning(_ viewModel: SearchViewModel) {
+        viewModel.meaning.asObservable().bind(to: self.labelMeaing.rx.text).addDisposableTo(disposeBag)
+    }
+    
+    func bindButtonListTap(_ viewModel: SearchViewModel) {
+        self.buttonList.rx.tap.bind(to: viewModel.buttonListPressed).addDisposableTo(disposeBag)
+    }
+    
+    func bindButtonQuizeTap(_ viewModel: SearchViewModel) {
+        self.buttonQuiz.rx.tap.bind(to: viewModel.buttonQuizPressed).addDisposableTo(disposeBag)
+    }
+    
+    func bindTextFieldSearch(_ viewModel: SearchViewModel) {
+        bindTextFieldSearchInput(viewModel)
+        bindTextFieldSearchEndEditing()
+    }
+    
+    func bindImageViews(_ viewModel: SearchViewModel) {
+        bindImageFirst(viewModel)
+        bindImageSecond(viewModel)
+        bindImageThird(viewModel)
+    }
+    
+    func bindButtonTaps(_ viewModel: SearchViewModel) {
+        bindButtonListTap(viewModel)
+        bindButtonQuizeTap(viewModel)
+    }
+    
+    func bindShouldGos() {
+        bindShouldGoToListViewController()
+        bindShouldGoToQuizViewController()
+    }
+
+    fileprivate func addBindsToViewModel(_ viewModel: SearchViewModel) {
+        bindTextFieldSearch(viewModel)
+        bindImageViews(viewModel)
+        bindMeaning(viewModel)
+        bindButtonTaps(viewModel)
+        bindShouldGos()
+    }
+    
+    func bindShouldGoToListViewController() {
+        searchViewModel?.shouldGoToListViewController.asObservable().subscribe(onNext: { [weak self] value in
+            self?.performSegue(withIdentifier: "showList", sender: nil)
+        }).disposed(by: disposeBag)
+    }
+    
+    func bindShouldGoToQuizViewController() {
+        searchViewModel?.shouldGoToQuizViewController.asObservable().subscribe(onNext: { [weak self] value in
+            self?.performSegue(withIdentifier: "showQuiz", sender: nil)
+        }).disposed(by: disposeBag)
+    }
+
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         guard let viewModel = self.searchViewModel else { return false }
         return viewModel.shouldPerformSegue(withIdentifier: identifier, sender: sender)

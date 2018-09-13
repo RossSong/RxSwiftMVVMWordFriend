@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import RxSwift
 @testable import RxSwiftWordFriend
 
 class MockImageSearchService : ImageSearchService {
@@ -22,13 +23,14 @@ class MockImageSearchService : ImageSearchService {
 }
 
 class SearchViewModelTests: XCTestCase {
+    let disposeBag = DisposeBag()
     var searchViewModel : SearchViewModel?
     
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         if let dataManager = MockDictionaryService(MockDataManager()) {
-            self.searchViewModel = SearchViewModel(dicService: dataManager, imageService: MockImageSearchService(), dbManager: MockDataManager())
+            self.searchViewModel = SearchViewModel(dicService: dataManager, imageService: MockImageSearchService(), dbManager: MockDataManager(), widthOfImageView: 100)
         }
     }
     
@@ -69,4 +71,21 @@ class SearchViewModelTests: XCTestCase {
         }
     }
     
+    func testButtonListPressed() {
+        var value = false
+        searchViewModel?.shouldGoToListViewController.asObservable().subscribe(onNext: { _ in
+            value = true
+        }).disposed(by: disposeBag)
+        searchViewModel?.buttonListPressed.onNext()
+        XCTAssert(true == value)
+    }
+    
+    func testButtonQuizPressed() {
+        var value = false
+        searchViewModel?.shouldGoToQuizViewController.asObservable().subscribe(onNext: { _ in
+            value = true
+        }).disposed(by: disposeBag)
+        searchViewModel?.buttonQuizPressed.onNext()
+        XCTAssert(true == value)
+    }
 }
