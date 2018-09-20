@@ -9,6 +9,8 @@ def myPods
         pod 'AlamofireImage', '~> 3.1'
         pod 'RxAlamofire'
 	pod 'RealmSwift'
+        pod 'Quick'
+    	pod 'Nimble'
 end
 
 target 'RxSwiftWordFriend' do
