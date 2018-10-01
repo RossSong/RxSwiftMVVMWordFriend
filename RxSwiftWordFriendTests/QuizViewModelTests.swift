@@ -8,13 +8,27 @@
 
 import Quick
 import Nimble
+@testable import RxSwiftWordFriend
 
 class QuizViewModelTests: QuickSpec {
     override func spec() {
         describe("QuizView") {
+            
+            var viewModel: QuizViewModelProtocol?
+            var mockDataManager: MockDataManager?
+            
+            beforeEach {
+                viewModel = QuizeViewModel()
+                mockDataManager = MockDataManager()
+                Service.shared.container.register(DataManager.self) { _ in mockDataManager! }
+            }
+            
             context("View did load") {
                 it("should load words from database") {
-                    
+                    let voca = Vocabulary()
+                    mockDataManager?.addWord(voca)
+                    viewModel?.action.onNext(.viewDidLoad)
+                    expect(viewModel?.words.count).toNot(equal(0))
                 }
                 
                 it("should show one word randomly from loaded words") {
