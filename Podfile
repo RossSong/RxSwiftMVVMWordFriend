@@ -11,6 +11,7 @@ def myPods
 	pod 'RealmSwift'
         pod 'Quick'
     	pod 'Nimble'
+	pod 'Swinject'
 end
 
 target 'RxSwiftWordFriend' do

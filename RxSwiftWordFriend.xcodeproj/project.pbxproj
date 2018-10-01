@@ -18,6 +18,7 @@
 		912C4BC31EDAF3DB00942AA2 /* MockObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912C4BC21EDAF3DB00942AA2 /* MockObjects.swift */; };
 		912C4BC51EDAF43200942AA2 /* ListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912C4BC41EDAF43200942AA2 /* ListViewModelTests.swift */; };
 		914791CD21532596009B189E /* QuizViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914791CC21532596009B189E /* QuizViewModelTests.swift */; };
+		918FD36D216204B100BE879F /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918FD36C216204B100BE879F /* Service.swift */; };
 		91A219E51ED5BAEB009FF41F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219E41ED5BAEB009FF41F /* ListViewController.swift */; };
 		91A219E81ED5BB43009FF41F /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219E71ED5BB43009FF41F /* QuizViewController.swift */; };
 		91A219EA1ED5BB53009FF41F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219E91ED5BB53009FF41F /* SearchViewController.swift */; };
@@ -66,6 +67,7 @@
 		912C4BC21EDAF3DB00942AA2 /* MockObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockObjects.swift; sourceTree = "<group>"; };
 		912C4BC41EDAF43200942AA2 /* ListViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModelTests.swift; sourceTree = "<group>"; };
 		914791CC21532596009B189E /* QuizViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModelTests.swift; sourceTree = "<group>"; };
+		918FD36C216204B100BE879F /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Service.swift; path = Service/Service.swift; sourceTree = "<group>"; };
 		91A219E41ED5BAEB009FF41F /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListViewController.swift; path = ViewController/ListViewController.swift; sourceTree = "<group>"; };
 		91A219E71ED5BB43009FF41F /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizViewController.swift; path = ViewController/QuizViewController.swift; sourceTree = "<group>"; };
 		91A219E91ED5BB53009FF41F /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = ViewController/SearchViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				91A219FB1ED5D9C5009FF41F /* DictionaryService.swift */,
 				912396E31ED69F5E0068F374 /* DataManager.swift */,
 				912396E51ED69FA90068F374 /* RealmDataManager.swift */,
+				918FD36C216204B100BE879F /* Service.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				91A219EF1ED5BCF7009FF41F /* SearchViewModel.swift in Sources */,
 				91A21A0A1ED5DFAF009FF41F /* TFHppleElement.m in Sources */,
 				91A219F51ED5BD55009FF41F /* ListViewModel.swift in Sources */,
+				918FD36D216204B100BE879F /* Service.swift in Sources */,
 				91A219F31ED5BD2B009FF41F /* QuizViewModel.swift in Sources */,
 				910C33181ED4509C0005BFA7 /* AppDelegate.swift in Sources */,
 				91A219F71ED5BD84009FF41F /* Vacabulary.swift in Sources */,
