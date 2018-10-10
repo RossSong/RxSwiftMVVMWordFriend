@@ -53,15 +53,15 @@ class SearchViewModel : SearchViewModelDelegate {
     }
     
     func setupButtonListPressedEventsHandler() {
-        _ = self.buttonListPressed.subscribe(onNext: { [weak self] _ in
+        self.buttonListPressed.subscribe(onNext: { [weak self] _ in
             self?.shouldGoToListViewController.onNext()
-        })
+        }).disposed(by: disposeBag)
     }
     
     func setupButtonQuizPressedEventsHandler() {
-        _ = self.buttonQuizPressed.subscribe(onNext: { [weak self] _ in
+        self.buttonQuizPressed.subscribe(onNext: { [weak self] _ in
             self?.shouldGoToQuizViewController.onNext()
-        })
+        }).disposed(by: disposeBag)
     }
     
     func setupEventsHandler() {
@@ -95,12 +95,8 @@ class SearchViewModel : SearchViewModelDelegate {
     
     func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         guard let wordList = self.dataManager.readWordList() else { return false }
-        
-        if 0 == wordList.count && "gotoQuiz" == identifier {
-            return false
-        }
-        
-        return true
+        guard 0 == wordList.count && "gotoQuiz" == identifier else { return true }
+        return false
     }
     
     func getHeight(image:UIImage?) -> CGFloat {
