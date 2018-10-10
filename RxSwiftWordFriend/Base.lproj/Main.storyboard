@@ -40,7 +40,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="Lpt-LJ-DEI" kind="show" id="iNq-zc-x20"/>
+                                    <segue destination="Lpt-LJ-DEI" kind="show" identifier="showList" id="iNq-zc-x20"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dj6-MW-qEu">
@@ -231,6 +231,9 @@
                                         <color key="value" red="0.55294117649999996" green="0.81176470590000005" blue="0.54117647059999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="buttonBackTapped:" destination="Lpt-LJ-DEI" eventType="touchUpInside" id="y5D-Ag-wQL"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dhH-xO-BZp">
                                 <rect key="frame" x="0.0" y="80" width="375" height="579"/>
