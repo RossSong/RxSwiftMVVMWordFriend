@@ -17,6 +17,7 @@ protocol SearchViewModelDelegate {
 }
 
 class SearchViewModel : SearchViewModelDelegate {
+    var disposeBag = DisposeBag()
     var widthOfImageView: CGFloat = 0
     var dictionaryService : DictionaryService
     var imageSearchService : ImageSearchService
@@ -44,7 +45,6 @@ class SearchViewModel : SearchViewModelDelegate {
         self.dictionaryService = dicService
         self.imageSearchService = imageService
         self.dataManager = dbManager
-        self.dictionaryService.setTargetViewModel(self)
         self.imageSearchService.setTargetViewModel(self)
         
         self.images = [self.imageFirst, self.imageSecond, self.imageThird]
@@ -75,7 +75,10 @@ class SearchViewModel : SearchViewModelDelegate {
     
     func doSearchWord() {
         print("doSearchWord: \(self.searchWord.value)")
-        self.dictionaryService.getMeaningFromServer(self.searchWord.value)
+        self.dictionaryService.getMeaningFromServer(self.searchWord.value).asObservable()
+            .subscribe(onNext: {[weak self] value in
+                self?.updateModel(value)
+            }).disposed(by: disposeBag)
         self.imageSearchService.getImagesFromServer(self.searchWord.value)
     }
     

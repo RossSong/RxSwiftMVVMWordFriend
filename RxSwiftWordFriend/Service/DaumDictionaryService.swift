@@ -8,64 +8,74 @@
 
 import Foundation
 import Alamofire
+import RxSwift
 
 class DaumDictionaryService : NSObject, XMLParserDelegate, DictionaryService {
-    var delegate: SearchViewModelDelegate?
     
-    func setTargetViewModel(_ viewModel:SearchViewModelDelegate) {
-        self.delegate = viewModel
+    func getElementsFrom(_ data: Data) -> [TFHppleElement]? {
+        guard let parser = TFHpple(htmlData: data) else { return nil }
+        let stringQuery = "//div[@class='cleanword_type kuek_type']/ul[@class='list_search']/li"
+        return parser.search(withXPathQuery: stringQuery) as? [TFHppleElement]
     }
     
-    func getMeaningFromServer(_ word:String) {
-        let stringSearch = "http://dic.daum.net/search.do"
-        let parameterDict = ["q": word]
-        
-        //print(stringSearch)
-        Alamofire.request(stringSearch, method:.get, parameters:parameterDict).responseData { response in
-            debugPrint(response)
-            
-            if let data = response.result.value, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)")
-                
-                if let data = response.result.value, let utf8Text = String(data: data, encoding: .utf8) {
-                    print("Data: \(utf8Text)")
-                    let dataHtml:NSData? = data as NSData
-                    let parser = TFHpple(htmlData: dataHtml as Data!)
-                    
-                    let stringQuery = "//div[@class='cleanword_type kuek_type']/ul[@class='list_search']/li"
-                    let array = parser?.search(withXPathQuery: stringQuery)
-                    
-                    let meaning = self.getMeaning(array as! [TFHppleElement])
-                    
-                    let voca = Vocabulary()
-                    voca.word = word
-                    voca.meaning = meaning
-                    self.delegate?.updateModel(voca)
-                }
-            }
+    func createVocabulary(word: String, meaning: String) -> Vocabulary {
+        let voca = Vocabulary()
+        voca.word = word
+        voca.meaning = meaning
+        return voca
+    }
+    
+    func getVocaFromData(_ data: Data, word: String) -> Vocabulary? {
+        guard let elements = getElementsFrom(data) else { return nil }
+        return createVocabulary(word: word, meaning: self.getMeaning(elements))
+    }
+    
+    func handleSuccessForRequestSearch(_ observer: AnyObserver<Vocabulary>, word:String, data: Data?) {
+        guard let data = data,
+            //let utf8Text = String(data: data, encoding: .utf8),
+            let voca = getVocaFromData(data, word: word) else { return }
+        //debugPrint(utf8Text)
+        observer.onNext(voca)
+        observer.onCompleted()
+    }
+    
+    func handleForRequestSearch(_ observer: AnyObserver<Vocabulary>, word:String, response: DataResponse<Data>) {
+        switch response.result {
+        case .success(let value):
+            self.handleSuccessForRequestSearch(observer, word: word, data: value)
+        case .failure(let error):
+            observer.onError(error)
         }
+    }
+    
+    func getMeaningFromServer(_ word:String) -> Observable<Vocabulary> {
+        return Observable.create { observer -> Disposable in
+            let stringSearch = "http://dic.daum.net/search.do"
+            let parameterDict = ["q": word]
+            
+            Alamofire.request(stringSearch, method:.get, parameters:parameterDict).responseData { [weak self] response in
+                self?.handleForRequestSearch(observer, word: word, response: response)
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func getStringFrom(elementContent: TFHppleElement) -> String {
+        guard let elementContentChildren = elementContent.children as? [TFHppleElement] else { return "" }
+        return elementContentChildren.map { $0.content ?? "" }.joined()
+    }
+    
+    func getStringFrom(element: TFHppleElement) -> String {
+        print(element)
+        guard 1 < element.children.count,
+            let child = element.children[1] as? TFHppleElement,
+            let elementContentes = child.children as? [TFHppleElement] else { return "" }
+        
+        return elementContentes.map{ getStringFrom(elementContent: $0) }.joined()
     }
     
     func getMeaning(_ array:[TFHppleElement]) -> String {
-        var stringTitle = ""
-        for element in array {
-            print(element)
-            
-            if 2 > element.children.count {
-                continue;
-            }
-            
-            let child = element.children[1] as! TFHppleElement
-            for elementContent in child.children as! [TFHppleElement] {
-                for elementWord in elementContent.children as! [TFHppleElement] {
-                    stringTitle += elementWord.content
-                }
-            }
-            
-            stringTitle += "\n"
-            print(stringTitle)
-        }
-        
-        return stringTitle
+       return array.map { getStringFrom(element: $0) }.joined(separator: "\n")
     }
 }

@@ -7,8 +7,8 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol DictionaryService {
-    func setTargetViewModel(_ viewModel:SearchViewModelDelegate)
-    func getMeaningFromServer(_ word:String)
+    func getMeaningFromServer(_ word:String) -> Observable<Vocabulary>
 }
