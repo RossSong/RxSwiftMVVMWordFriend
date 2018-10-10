@@ -22,47 +22,40 @@ class GoogleImageSearchService : ImageSearchService {
         self.delegate = viewModel
     }
     
+    func handleForDownloadImage(_ response: Alamofire.DataResponse<Image>) {
+        guard let image = response.result.value else { return }
+        print("image downloaded: \(image)")
+        self.delegate?.setupImage(image, index:self.imageIndex)
+        self.imageIndex = self.imageIndex + 1
+    }
+    
     func downloadAndSetupImage (_ stringThumbnailURL:String, height:Int?) {
-        Alamofire.request(stringThumbnailURL).responseImage { response in
-            debugPrint(response)
-            
-            debugPrint(response.result)
-            
-            if let image = response.result.value {
-                print("image downloaded: \(image)")
-                self.delegate?.setupImage(image, index:self.imageIndex)
-                self.imageIndex = self.imageIndex + 1
-            }
+        Alamofire.request(stringThumbnailURL).responseImage { [weak self] response in
+            self?.handleForDownloadImage(response)
         }
     }
     
     func setupResultImage(_ jsonDict:Dictionary<String, Any>) {
-        if let dictPagemap = jsonDict["pagemap"] as? Dictionary<String, Any> {
-            if let dictThumbnail = dictPagemap["cse_image"] as? [Dictionary<String, Any>] {
-                if let stringThumbnailURL = dictThumbnail[0]["src"] as? String {
-                    print(stringThumbnailURL)
-                    
-                    let height = dictThumbnail[0]["height"] as? Int
-                    if stringThumbnailURL.hasPrefix("https://") {
-                        self.downloadAndSetupImage(stringThumbnailURL, height:height)
-                    }
-                }
-            }
-        }
+        guard let dictPagemap = jsonDict["pagemap"] as? Dictionary<String, Any> else { return }
+        guard let dictThumbnail = dictPagemap["cse_image"] as? [Dictionary<String, Any>] else { return }
+        guard dictThumbnail.count > 0 else { return }
+        guard let stringThumbnailURL = dictThumbnail[0]["src"] as? String else { return }
+        guard stringThumbnailURL.hasPrefix("https://") else { return }
+        let height = dictThumbnail[0]["height"] as? Int
+        self.downloadAndSetupImage(stringThumbnailURL, height:height)
+    }
+    
+    func doSetupImage(_ jsonDict: Dictionary<String, String>?) {
+        guard let jsonDict = jsonDict, nil != jsonDict["title"] else { return }
+        self.setupResultImage(jsonDict)
     }
     
     func showImageSearchResult(_ items:[Dictionary<String, Any>]) {
-        for jsonDict in items {
-            let stringTitle = jsonDict["title"] as! String
-            print(stringTitle)
-            
-            self.setupResultImage(jsonDict)
-        }
+        _ = items.map{ doSetupImage($0 as? Dictionary<String, String>) }
     }
     
-    func getImagesFromServer(_ word:String) {
-        self.imageIndex = 0
-        let parameterDict = [
+    func getParameterDict(_ word:String) -> Dictionary<String, Any> {
+        return [
             "key": googleAPIKeyString,
             "cx": googleAPIEngineIDString,
             "searchtype": "image",
@@ -70,18 +63,22 @@ class GoogleImageSearchService : ImageSearchService {
             "start": "1",
             "q": word
         ]
+    }
+    
+    func handleForResultOfImageSearch(_ response: Alamofire.DataResponse<Any>) {
+        guard let json = response.result.value as? Dictionary<String, Any> else { return }
+        print("JSON: \(json)")
+        guard let items = json["items"] as? [Dictionary<String, Any>] else { return }
+        debugPrint(items)
+        self.showImageSearchResult(items)
+    }
+    
+    func getImagesFromServer(_ word:String) {
+        self.imageIndex = 0
+        let parameterDict = getParameterDict(word)
         
-        Alamofire.request(stringGoogleApi, method:.get, parameters:parameterDict).responseJSON { response in
-            debugPrint(response)
-            
-            if let json = response.result.value as? Dictionary<String, Any> {
-                print("JSON: \(json)")
-                
-                if let items = json["items"] as? [Dictionary<String, Any>] {
-                    debugPrint(items)
-                    self.showImageSearchResult(items)
-                }
-            }
+        Alamofire.request(stringGoogleApi, method:.get, parameters:parameterDict).responseJSON { [weak self] response in
+            self?.handleForResultOfImageSearch(response)
         }
     }
 
