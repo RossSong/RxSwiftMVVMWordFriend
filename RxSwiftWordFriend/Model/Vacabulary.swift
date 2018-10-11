@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 class Vocabulary : Object {
-    dynamic var word:String = ""
-    dynamic var meaning:String = ""
-    dynamic var imageURL:String = ""
+    @objc dynamic var word:String = ""
+    @objc dynamic var meaning:String = ""
+    @objc dynamic var imageURL:String = ""
 }

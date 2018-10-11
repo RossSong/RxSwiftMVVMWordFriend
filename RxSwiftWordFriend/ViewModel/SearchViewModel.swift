@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import RxCocoa
 import RxSwift
 import Alamofire
 
@@ -23,13 +24,13 @@ class SearchViewModel : SearchViewModelDelegate {
     var imageSearchService : ImageSearchService
     var dataManager : DataManager
     
-    var searchWord: Variable<String>
-    var imageFirst: Variable<(image: UIImage, height: CGFloat)>
-    var imageSecond: Variable<(image: UIImage, height: CGFloat)>
-    var imageThird: Variable<(image: UIImage, height: CGFloat)>
-    var meaning: Variable<String>
+    var searchWord: BehaviorRelay<String>
+    var imageFirst: BehaviorRelay<(image: UIImage, height: CGFloat)>
+    var imageSecond: BehaviorRelay<(image: UIImage, height: CGFloat)>
+    var imageThird: BehaviorRelay<(image: UIImage, height: CGFloat)>
+    var meaning: BehaviorRelay<String>
     
-    var images = [Variable<(image: UIImage, height: CGFloat)>]()
+    var images = [BehaviorRelay<(image: UIImage, height: CGFloat)>]()
     let buttonListPressed = PublishSubject<Void>()
     let buttonQuizPressed = PublishSubject<Void>()
     let shouldGoToQuizViewController = PublishSubject<Void>()
@@ -37,11 +38,11 @@ class SearchViewModel : SearchViewModelDelegate {
     
     init?(dicService: DictionaryService, imageService: ImageSearchService, dbManager: DataManager, widthOfImageView: CGFloat) {
         self.widthOfImageView = widthOfImageView
-        self.searchWord = Variable<String>("")
-        self.imageFirst = Variable<(image: UIImage, height: CGFloat)>(image: UIImage(), height: 0)
-        self.imageSecond = Variable<(image: UIImage, height: CGFloat)>(image: UIImage(), height: 0)
-        self.imageThird = Variable<(image: UIImage, height: CGFloat)>(image: UIImage(), height: 0)
-        self.meaning = Variable<String>("")
+        self.searchWord = BehaviorRelay<String>(value: "")
+        self.imageFirst = BehaviorRelay<(image: UIImage, height: CGFloat)>(value: (image: UIImage(), height: 0.0))
+        self.imageSecond = BehaviorRelay<(image: UIImage, height: CGFloat)>(value: (image: UIImage(), height: 0.0))
+        self.imageThird = BehaviorRelay<(image: UIImage, height: CGFloat)>(value: (image: UIImage(), height: 0.0))
+        self.meaning = BehaviorRelay<String>(value: "")
         self.dictionaryService = dicService
         self.imageSearchService = imageService
         self.dataManager = dbManager
@@ -53,15 +54,11 @@ class SearchViewModel : SearchViewModelDelegate {
     }
     
     func setupButtonListPressedEventsHandler() {
-        self.buttonListPressed.subscribe(onNext: { [weak self] _ in
-            self?.shouldGoToListViewController.onNext()
-        }).disposed(by: disposeBag)
+        self.buttonListPressed.bind(to:shouldGoToListViewController).disposed(by: disposeBag)
     }
     
     func setupButtonQuizPressedEventsHandler() {
-        self.buttonQuizPressed.subscribe(onNext: { [weak self] _ in
-            self?.shouldGoToQuizViewController.onNext()
-        }).disposed(by: disposeBag)
+        self.buttonQuizPressed.bind(to: shouldGoToQuizViewController).disposed(by: disposeBag)
     }
     
     func setupEventsHandler() {
@@ -83,14 +80,14 @@ class SearchViewModel : SearchViewModelDelegate {
     }
     
     func updateModel(_ model:Vocabulary) {
-        self.meaning.value = model.meaning
+        self.meaning.accept(model.meaning)
         self.dataManager.addWord(model)
     }
     
     func setupImage(_ image:UIImage, index:Int) {
         guard  self.images.count > index else { return }
         let height = getHeight(image: image)
-        self.images[index].value = (image: image, height: height)
+        self.images[index].accept((image: image, height: height))
     }
     
     func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

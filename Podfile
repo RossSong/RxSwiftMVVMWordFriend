@@ -3,15 +3,13 @@ platform :ios, '9.0'
 use_frameworks!
 
 def myPods
-        pod 'RxSwift',    '~> 3.0'
-    	pod 'RxCocoa',    '~> 3.0'
-        pod 'Alamofire', '~> 4.4'
-        pod 'AlamofireImage', '~> 3.1'
-        pod 'RxAlamofire'
-	pod 'RealmSwift'
-        pod 'Quick'
-    	pod 'Nimble'
-	pod 'Swinject'
+    pod 'RxSwift'
+    pod 'RxCocoa'
+    pod 'Alamofire'
+    pod 'AlamofireImage'
+    pod 'RxAlamofire'
+    pod 'RealmSwift'
+    pod 'Swinject'
 end
 
 target 'RxSwiftWordFriend' do
@@ -20,4 +18,6 @@ end
 
 target 'RxSwiftWordFriendTests' do
 	myPods
+    pod 'Quick'
+    pod 'Nimble'
 end

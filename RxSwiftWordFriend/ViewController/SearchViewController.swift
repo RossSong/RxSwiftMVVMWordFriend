@@ -51,7 +51,7 @@ class SearchViewController: UIViewController {
 
     func bindTextFieldSearchInput(_ viewModel: SearchViewModel) {
         self.textFieldSearch.rx.text.orEmpty.throttle(throttleInterval, scheduler: MainScheduler.instance)
-            .bind(to:viewModel.searchWord).addDisposableTo(disposeBag)
+            .bind(to:viewModel.searchWord).disposed(by: disposeBag)
     }
     
     func bindTextFieldSearchEndEditing() {
@@ -62,7 +62,7 @@ class SearchViewController: UIViewController {
                 self.searchViewModel?.doSearchWord()
                 self.labelWord.text = self.textFieldSearch.text
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
     
     func setupImageView(_ imageView: UIImageView?, image: UIImage?, heightConstraint: NSLayoutConstraint?, height: CGFloat) {
@@ -73,31 +73,31 @@ class SearchViewController: UIViewController {
     func bindImageFirst(_ viewModel: SearchViewModel) {
         viewModel.imageFirst.asObservable().subscribe(onNext: { [weak self] (image, height) in
             self?.setupImageView(self?.imageViewFirst, image: image, heightConstraint: self?.constraintHeightOfFirstImageView, height: height)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
     
     func bindImageSecond(_ viewModel: SearchViewModel) {
         viewModel.imageSecond.asObservable().subscribe(onNext: { [weak self] (image, height) in
             self?.setupImageView(self?.imageViewSecond, image: image, heightConstraint: self?.constraintHeightOfSecondImageView, height: height)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
     
     func bindImageThird(_ viewModel: SearchViewModel) {
         viewModel.imageThird.asObservable().subscribe(onNext: { [weak self] (image, height) in
             self?.setupImageView(self?.imageViewThird, image: image, heightConstraint: self?.constraintHeightOfThirdImageView, height: height)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
     
     func bindMeaning(_ viewModel: SearchViewModel) {
-        viewModel.meaning.asObservable().bind(to: self.labelMeaing.rx.text).addDisposableTo(disposeBag)
+        viewModel.meaning.asObservable().bind(to: self.labelMeaing.rx.text).disposed(by: disposeBag)
     }
     
     func bindButtonListTap(_ viewModel: SearchViewModel) {
-        self.buttonList.rx.tap.bind(to: viewModel.buttonListPressed).addDisposableTo(disposeBag)
+        self.buttonList.rx.tap.bind(to: viewModel.buttonListPressed).disposed(by: disposeBag)
     }
     
     func bindButtonQuizeTap(_ viewModel: SearchViewModel) {
-        self.buttonQuiz.rx.tap.bind(to: viewModel.buttonQuizPressed).addDisposableTo(disposeBag)
+        self.buttonQuiz.rx.tap.bind(to: viewModel.buttonQuizPressed).disposed(by: disposeBag)
     }
     
     func bindTextFieldSearch(_ viewModel: SearchViewModel) {

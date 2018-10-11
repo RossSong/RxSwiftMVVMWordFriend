@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import RealmSwift
+import RxCocoa
 import RxSwift
 
 enum ActionOfListView {
@@ -20,14 +21,14 @@ class ListViewModel {
     let disposeBag = DisposeBag()
     
     var dataManager : DataManager?
-    var wordList : Variable<[Vocabulary]>?
+    var wordList : BehaviorRelay<[Vocabulary]>?
     var action = PublishSubject<ActionOfListView>()
-    var isTableViewEditing = Variable<Bool>(false)
-    var titleOfButtonEdit = Variable<String>("Done")
+    var isTableViewEditing = BehaviorRelay<Bool>(value: false)
+    var titleOfButtonEdit = BehaviorRelay<String>(value: "Done")
     
     func setupData() {
         guard let list = dataManager?.readWordList() else { return }
-        self.wordList = Variable<[Vocabulary]>(list)
+        self.wordList = BehaviorRelay<[Vocabulary]>(value: list)
     }
     
     func bind() {
@@ -49,20 +50,20 @@ class ListViewModel {
     func deleteWord(index:Int) {
         guard let manager = self.dataManager else { return }
         guard let list = manager.deleteWord(index:index) else { return }
-        self.wordList?.value = list
+        self.wordList?.accept(list)
     }
     
     func setupTitleOfButtonEdit() {
         if isTableViewEditing.value {
-            titleOfButtonEdit.value = "Edit"
+            titleOfButtonEdit.accept("Edit")
         }
         else {
-            titleOfButtonEdit.value = "Done"
+            titleOfButtonEdit.accept("Done")
         }
     }
     
     func handleButtonEditTapped() {
-        isTableViewEditing.value = !isTableViewEditing.value
+        isTableViewEditing.accept(!isTableViewEditing.value)
         setupTitleOfButtonEdit()
     }
     
