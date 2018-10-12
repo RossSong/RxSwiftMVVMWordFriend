@@ -4,6 +4,8 @@ PODS:
     - Alamofire (~> 4.7)
   - Nimble (7.3.1)
   - Quick (1.3.2)
+  - ReactorKit (1.2.0):
+    - RxSwift (>= 4.0.0)
   - Realm (3.11.0):
     - Realm/Headers (= 3.11.0)
   - Realm/Headers (3.11.0)
@@ -24,6 +26,7 @@ DEPENDENCIES:
   - AlamofireImage
   - Nimble
   - Quick
+  - ReactorKit
   - RealmSwift
   - RxAlamofire
   - RxCocoa
@@ -35,6 +38,7 @@ SPEC CHECKSUMS:
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
   Nimble: 04f732da099ea4d153122aec8c2a88fd0c7219ae
   Quick: 2623cb30d7a7f41ca62f684f679586558f483d46
+  ReactorKit: 18ca466f1e77fef1827addeb921fba8ae14edd63
   Realm: 92f09a102692b96a9a10e9617f214f15c5ab85fc
   RealmSwift: 5f0481cd658bb751c509314b964a35eaa264d2cf
   RxAlamofire: 09624d0f2d48ed8b686e4eb4cf68e28cbd2df556
@@ -42,6 +46,6 @@ SPEC CHECKSUMS:
   RxSwift: fe0fd770a43acdb7d0a53da411c9b892e69bb6e4
   Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
 
-PODFILE CHECKSUM: c1ac859cc5cafa0b7fb8f264438ad3245bbb58c4
+PODFILE CHECKSUM: 6425d8bd3ff6722467a57502fa4ab7459caff559
 
 COCOAPODS: 1.2.1

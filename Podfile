@@ -10,6 +10,7 @@ def myPods
     pod 'RxAlamofire'
     pod 'RealmSwift'
     pod 'Swinject'
+    pod 'ReactorKit'
 end
 
 target 'RxSwiftWordFriend' do
