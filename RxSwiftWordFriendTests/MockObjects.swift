@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import RxCocoa
+import RxSwift
+
 @testable import RxSwiftWordFriend
 
 class MockDataManager : DataManager {
@@ -39,14 +42,17 @@ class MockDictionaryService : DictionaryService {
         self.delegate = viewModel
     }
     
-    func getMeaningFromServer(_ word:String) {
-        let model = Vocabulary()
-        
-        if "TEST" == word {
-            model.word = "TEST"
-            model.meaning = "ABC"
+    func getMeaningFromServer(_ word:String) -> Observable<Vocabulary> {
+        return Observable.create { observer -> Disposable in
+            let model = Vocabulary()
+            
+            if "TEST" == word {
+                model.word = "TEST"
+                model.meaning = "ABC"
+            }
+            
+            observer.onNext(model)
+            return Disposables.create()
         }
-        
-        self.delegate?.updateModel(model)
     }
 }

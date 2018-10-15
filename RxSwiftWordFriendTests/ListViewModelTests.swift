@@ -67,7 +67,7 @@ class ListViewModelTests: XCTestCase {
     }
     
     func testButtonEditPressed() {
-        listViewModel?.isTableViewEditing.value = false
+        listViewModel?.isTableViewEditing.accept(false)
         listViewModel?.action.onNext(.buttonEditTapped)
         XCTAssert(true == listViewModel?.isTableViewEditing.value)
         XCTAssert("Edit" == listViewModel?.titleOfButtonEdit.value)

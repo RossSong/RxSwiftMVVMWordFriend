@@ -52,14 +52,14 @@ class SearchViewModelTests: XCTestCase {
     }
     
     func testDoSearchWord() {
-        self.searchViewModel?.searchWord.value = "TEST"
+        self.searchViewModel?.searchWord.accept("TEST")
         self.searchViewModel?.doSearchWord()
         XCTAssert("ABC" == self.searchViewModel?.meaning.value)
     }
     
     func testDoSearchWord2() {
         if let viewModel = self.searchViewModel {
-            viewModel.searchWord.value = "TEST"
+            viewModel.searchWord.accept("TEST")
             viewModel.doSearchWord()
             let list = viewModel.dataManager.readWordList()
             XCTAssert(nil != list)
@@ -76,7 +76,7 @@ class SearchViewModelTests: XCTestCase {
         searchViewModel?.shouldGoToListViewController.asObservable().subscribe(onNext: { _ in
             value = true
         }).disposed(by: disposeBag)
-        searchViewModel?.buttonListPressed.onNext()
+        searchViewModel?.buttonListPressed.onNext(())
         XCTAssert(true == value)
     }
     
@@ -85,7 +85,7 @@ class SearchViewModelTests: XCTestCase {
         searchViewModel?.shouldGoToQuizViewController.asObservable().subscribe(onNext: { _ in
             value = true
         }).disposed(by: disposeBag)
-        searchViewModel?.buttonQuizPressed.onNext()
+        searchViewModel?.buttonQuizPressed.onNext(())
         XCTAssert(true == value)
     }
 }
