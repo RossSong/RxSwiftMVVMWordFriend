@@ -56,3 +56,12 @@ class MockDictionaryService : DictionaryService {
         }
     }
 }
+
+class MockRandomGenerator: RandomGeneratorProtocol {
+    var randomIndex = -1
+    
+    func getRandomIndex(max: Int) -> Int {
+        return randomIndex
+    }
+}
+

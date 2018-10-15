@@ -35,6 +35,7 @@
 		91A21A181ED5E441009FF41F /* ImageSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A21A161ED5E441009FF41F /* ImageSearchService.swift */; };
 		91A21A191ED5E441009FF41F /* GoogleImageSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A21A171ED5E441009FF41F /* GoogleImageSearchService.swift */; };
 		91A21A1B1ED5F01F009FF41F /* SearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A21A1A1ED5F01F009FF41F /* SearchViewModelTests.swift */; };
+		91BFB2E32174780A00F329F0 /* RandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BFB2E22174780A00F329F0 /* RandomGenerator.swift */; };
 		C95B38BFB10FA557707B28AC /* Pods_RxSwiftWordFriend.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5668AD30FAD42CAF1BC825C1 /* Pods_RxSwiftWordFriend.framework */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +90,7 @@
 		91A21A161ED5E441009FF41F /* ImageSearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageSearchService.swift; path = Service/ImageSearchService.swift; sourceTree = "<group>"; };
 		91A21A171ED5E441009FF41F /* GoogleImageSearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleImageSearchService.swift; path = Service/GoogleImageSearchService.swift; sourceTree = "<group>"; };
 		91A21A1A1ED5F01F009FF41F /* SearchViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModelTests.swift; sourceTree = "<group>"; };
+		91BFB2E22174780A00F329F0 /* RandomGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RandomGenerator.swift; path = Helper/RandomGenerator.swift; sourceTree = "<group>"; };
 		BCD4DC6F21DAE52F278DDB37 /* Pods-RxSwiftWordFriendTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwiftWordFriendTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxSwiftWordFriendTests/Pods-RxSwiftWordFriendTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EE9A67907A9A52DC922CE9C4 /* Pods-RxSwiftWordFriend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwiftWordFriend.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxSwiftWordFriend/Pods-RxSwiftWordFriend.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -149,6 +151,7 @@
 		910C33161ED4509C0005BFA7 /* RxSwiftWordFriend */ = {
 			isa = PBXGroup;
 			children = (
+				91BFB2E1217477E300F329F0 /* Helper */,
 				91A219ED1ED5BCD3009FF41F /* Service */,
 				91A219EC1ED5BCB4009FF41F /* Model */,
 				91A219EB1ED5BB63009FF41F /* ViewModel */,
@@ -229,6 +232,14 @@
 				91A21A021ED5DFAE009FF41F /* RxSwiftWordFriend-Bridging-Header.h */,
 			);
 			name = Hpple;
+			sourceTree = "<group>";
+		};
+		91BFB2E1217477E300F329F0 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				91BFB2E22174780A00F329F0 /* RandomGenerator.swift */,
+			);
+			name = Helper;
 			sourceTree = "<group>";
 		};
 		D02112EA62458BF7DD4DC0DB /* Frameworks */ = {
@@ -452,6 +463,7 @@
 				91A219EF1ED5BCF7009FF41F /* SearchViewModel.swift in Sources */,
 				91A21A0A1ED5DFAF009FF41F /* TFHppleElement.m in Sources */,
 				91A219F51ED5BD55009FF41F /* ListViewModel.swift in Sources */,
+				91BFB2E32174780A00F329F0 /* RandomGenerator.swift in Sources */,
 				918FD36D216204B100BE879F /* Service.swift in Sources */,
 				91A219F31ED5BD2B009FF41F /* QuizViewModel.swift in Sources */,
 				910C33181ED4509C0005BFA7 /* AppDelegate.swift in Sources */,

@@ -16,14 +16,25 @@ enum QuizViewAction {
 
 protocol QuizViewModelProtocol {
     var action: PublishSubject<QuizViewAction> { get }
-    var words: [Vocabulary] { get }
+    var targetWord: String { get }
 }
 
 class QuizeViewModel: QuizViewModelProtocol {
     let disposeBag = DisposeBag()
+    
     var dataManager: DataManager?
+    var randomGenerator: RandomGeneratorProtocol?
+    
     var action = PublishSubject<QuizViewAction>()
     var words: [Vocabulary] = []
+    var targetIndex = 0
+    var targetWord: String {
+        get {
+            let index = (randomGenerator?.getRandomIndex(max: words.count) ?? -1)
+            guard index >= 0 else { return "" }
+            return words[index].word
+        }
+    }
     
     func handleViewDidLoad() {
         words = dataManager?.readWordList() ?? []
@@ -44,6 +55,7 @@ class QuizeViewModel: QuizViewModelProtocol {
     
     func setupDependencies() {
         dataManager = Service.shared.container.resolve(DataManager.self)
+        randomGenerator = Service.shared.container.resolve(RandomGeneratorProtocol.self)
     }
     
     init() {
