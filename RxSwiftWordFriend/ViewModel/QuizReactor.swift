@@ -26,7 +26,6 @@ class QuizReactor: Reactor {
         case loadWords
         case peekAWord
         case evaluateAnswer(index: Int)
-        case closePopupAndPeekAWord
     }
     
     struct State {
@@ -36,7 +35,6 @@ class QuizReactor: Reactor {
         var options = ["", ""]
         var shouldShowPopupForCongratulation = false
         var shouldShowPopupForWrong = false
-        var shouldClosePopup = false
     }
     
     func setupDependencies() {
@@ -57,7 +55,7 @@ class QuizReactor: Reactor {
         case .selectAnswer(let index):
             return Observable.just(Mutation.evaluateAnswer(index: index))
         case .confirmPopup:
-            return Observable.just(Mutation.closePopupAndPeekAWord)
+            return Observable.just(Mutation.peekAWord)
         }
     }
     
@@ -81,15 +79,6 @@ class QuizReactor: Reactor {
         return state
     }
     
-    func handleClosePopupAndPeekAWord(_ state: State) -> State {
-        var state = state
-        state.indexAnswer = randomGenerator?.getRandomIndex(max: 2) ?? -1
-        state.shouldShowPopupForCongratulation = false
-        state.shouldShowPopupForWrong = false
-        state.shouldClosePopup = true
-        return state
-    }
-    
     func reduce(state: State, mutation: Mutation) -> State {
         switch mutation {
         case .loadWords:
@@ -98,8 +87,6 @@ class QuizReactor: Reactor {
             return handlePeekAWord(state)
         case .evaluateAnswer(let index):
             return handleEvaluateAnswer(state, index: index)
-        case .closePopupAndPeekAWord:
-            return handleClosePopupAndPeekAWord(state)
         }
     }
 

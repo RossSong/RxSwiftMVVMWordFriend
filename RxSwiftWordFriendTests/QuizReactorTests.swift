@@ -99,7 +99,6 @@ class QuizReactorTests: QuickSpec {
                         reactor?.action.onNext(.confirmPopup)
                         expect(result.value.shouldShowPopupForCongratulation).to(beFalse())
                         expect(result.value.shouldShowPopupForWrong).to(beFalse())
-                        expect(result.value.shouldClosePopup).to(beTrue())
                         expect(result.value.indexAnswer).to(equal(1))
                     }
                 }
