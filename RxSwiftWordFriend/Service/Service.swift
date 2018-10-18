@@ -20,6 +20,7 @@ struct Service {
     
     func register() {
         container.register(DataManager.self) { _ in RealmDataManager.shared }
+        container.register(QuizManagerProtocol.self) { _ in QuizManager()}
     }
     
     func resolve<Service>(_ serviceType: Service.Type) -> Service? {

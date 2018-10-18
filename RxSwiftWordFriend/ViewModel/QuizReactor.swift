@@ -11,8 +11,7 @@ import RxSwift
 import ReactorKit
 
 class QuizReactor: Reactor {
-    var dataManager: DataManager?
-    var randomGenerator: RandomGeneratorProtocol?
+    var quizManager: QuizManagerProtocol?
     var initialState = State()
     
     enum Action {
@@ -29,8 +28,6 @@ class QuizReactor: Reactor {
     }
     
     struct State {
-        var words: [Vocabulary] = []
-        var indexAnswer: Int?
         var word: String = ""
         var options = ["", ""]
         var shouldShowPopupForCongratulation = false
@@ -38,8 +35,7 @@ class QuizReactor: Reactor {
     }
     
     func setupDependencies() {
-        dataManager = Service.shared.container.resolve(DataManager.self)
-        randomGenerator = Service.shared.container.resolve(RandomGeneratorProtocol.self)
+        quizManager = Service.shared.container.resolve(QuizManagerProtocol.self)
     }
     
     init() {
@@ -60,22 +56,26 @@ class QuizReactor: Reactor {
     }
     
     func handleLoadWords(_ state: State) -> State {
-        var state = state
-        state.words = dataManager?.readWordList() ?? []
+        let state = state
+        quizManager?.load()
         return state
     }
     
     func handlePeekAWord(_ state: State) -> State {
+        guard let quizManager = quizManager else { return state }
         var state = state
-        state.indexAnswer = randomGenerator?.getRandomIndex(max: 2) ?? -1
+        let value = quizManager.peek()
+        state.word = value.word
+        state.options = value.options
         return state
     }
     
     func handleEvaluateAnswer(_ state: State, index: Int) -> State {
         var state = state
-        guard -1 != state.indexAnswer else { return state }
-        state.shouldShowPopupForCongratulation = ( index == state.indexAnswer )
-        state.shouldShowPopupForWrong = ( index != state.indexAnswer )
+        guard let quizManager = quizManager else { return state }
+        let value = quizManager.check(state.options[index])
+        state.shouldShowPopupForCongratulation = value
+        state.shouldShowPopupForWrong = !value
         return state
     }
     

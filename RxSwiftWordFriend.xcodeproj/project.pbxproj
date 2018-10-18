@@ -17,14 +17,13 @@
 		912396E61ED69FA90068F374 /* RealmDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912396E51ED69FA90068F374 /* RealmDataManager.swift */; };
 		912C4BC31EDAF3DB00942AA2 /* MockObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912C4BC21EDAF3DB00942AA2 /* MockObjects.swift */; };
 		912C4BC51EDAF43200942AA2 /* ListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912C4BC41EDAF43200942AA2 /* ListViewModelTests.swift */; };
-		914791CD21532596009B189E /* QuizViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914791CC21532596009B189E /* QuizViewModelTests.swift */; };
 		914BABF6217581CA00D16069 /* QuizReactorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914BABF5217581CA00D16069 /* QuizReactorTests.swift */; };
 		918FD36D216204B100BE879F /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918FD36C216204B100BE879F /* Service.swift */; };
+		91A1E28E217822E200BD2B00 /* QuizManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A1E28D217822E200BD2B00 /* QuizManager.swift */; };
 		91A219E51ED5BAEB009FF41F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219E41ED5BAEB009FF41F /* ListViewController.swift */; };
 		91A219E81ED5BB43009FF41F /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219E71ED5BB43009FF41F /* QuizViewController.swift */; };
 		91A219EA1ED5BB53009FF41F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219E91ED5BB53009FF41F /* SearchViewController.swift */; };
 		91A219EF1ED5BCF7009FF41F /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219EE1ED5BCF7009FF41F /* SearchViewModel.swift */; };
-		91A219F31ED5BD2B009FF41F /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219F21ED5BD2B009FF41F /* QuizViewModel.swift */; };
 		91A219F51ED5BD55009FF41F /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219F41ED5BD55009FF41F /* ListViewModel.swift */; };
 		91A219F71ED5BD84009FF41F /* Vacabulary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219F61ED5BD84009FF41F /* Vacabulary.swift */; };
 		91A219F91ED5BDCE009FF41F /* DaumDictionaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A219F81ED5BDCE009FF41F /* DaumDictionaryService.swift */; };
@@ -69,14 +68,13 @@
 		912396E51ED69FA90068F374 /* RealmDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmDataManager.swift; path = Service/RealmDataManager.swift; sourceTree = "<group>"; };
 		912C4BC21EDAF3DB00942AA2 /* MockObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockObjects.swift; sourceTree = "<group>"; };
 		912C4BC41EDAF43200942AA2 /* ListViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModelTests.swift; sourceTree = "<group>"; };
-		914791CC21532596009B189E /* QuizViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModelTests.swift; sourceTree = "<group>"; };
 		914BABF5217581CA00D16069 /* QuizReactorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizReactorTests.swift; sourceTree = "<group>"; };
 		918FD36C216204B100BE879F /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Service.swift; path = Service/Service.swift; sourceTree = "<group>"; };
+		91A1E28D217822E200BD2B00 /* QuizManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuizManager.swift; path = Service/QuizManager.swift; sourceTree = "<group>"; };
 		91A219E41ED5BAEB009FF41F /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListViewController.swift; path = ViewController/ListViewController.swift; sourceTree = "<group>"; };
 		91A219E71ED5BB43009FF41F /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizViewController.swift; path = ViewController/QuizViewController.swift; sourceTree = "<group>"; };
 		91A219E91ED5BB53009FF41F /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = ViewController/SearchViewController.swift; sourceTree = "<group>"; };
 		91A219EE1ED5BCF7009FF41F /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewModel.swift; path = ViewModel/SearchViewModel.swift; sourceTree = "<group>"; };
-		91A219F21ED5BD2B009FF41F /* QuizViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizViewModel.swift; path = ViewModel/QuizViewModel.swift; sourceTree = "<group>"; };
 		91A219F41ED5BD55009FF41F /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListViewModel.swift; path = ViewModel/ListViewModel.swift; sourceTree = "<group>"; };
 		91A219F61ED5BD84009FF41F /* Vacabulary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Vacabulary.swift; path = Model/Vacabulary.swift; sourceTree = "<group>"; };
 		91A219F81ED5BDCE009FF41F /* DaumDictionaryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DaumDictionaryService.swift; path = Service/DaumDictionaryService.swift; sourceTree = "<group>"; };
@@ -176,7 +174,6 @@
 				910C332C1ED4509C0005BFA7 /* RxSwiftWordFriendTests.swift */,
 				91A21A1A1ED5F01F009FF41F /* SearchViewModelTests.swift */,
 				912C4BC41EDAF43200942AA2 /* ListViewModelTests.swift */,
-				914791CC21532596009B189E /* QuizViewModelTests.swift */,
 				914BABF5217581CA00D16069 /* QuizReactorTests.swift */,
 				910C332E1ED4509C0005BFA7 /* Info.plist */,
 			);
@@ -198,7 +195,6 @@
 			children = (
 				91A219F41ED5BD55009FF41F /* ListViewModel.swift */,
 				91A219EE1ED5BCF7009FF41F /* SearchViewModel.swift */,
-				91A219F21ED5BD2B009FF41F /* QuizViewModel.swift */,
 				91BFB2E421748A0200F329F0 /* QuizReactor.swift */,
 			);
 			name = ViewModel;
@@ -222,6 +218,7 @@
 				912396E31ED69F5E0068F374 /* DataManager.swift */,
 				912396E51ED69FA90068F374 /* RealmDataManager.swift */,
 				918FD36C216204B100BE879F /* Service.swift */,
+				91A1E28D217822E200BD2B00 /* QuizManager.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -471,9 +468,9 @@
 				91A219F51ED5BD55009FF41F /* ListViewModel.swift in Sources */,
 				91BFB2E32174780A00F329F0 /* RandomGenerator.swift in Sources */,
 				918FD36D216204B100BE879F /* Service.swift in Sources */,
-				91A219F31ED5BD2B009FF41F /* QuizViewModel.swift in Sources */,
 				910C33181ED4509C0005BFA7 /* AppDelegate.swift in Sources */,
 				91A219F71ED5BD84009FF41F /* Vacabulary.swift in Sources */,
+				91A1E28E217822E200BD2B00 /* QuizManager.swift in Sources */,
 				912396E41ED69F5E0068F374 /* DataManager.swift in Sources */,
 				91A21A0B1ED5DFAF009FF41F /* XPathQuery.m in Sources */,
 				91A21A181ED5E441009FF41F /* ImageSearchService.swift in Sources */,
@@ -493,7 +490,6 @@
 			files = (
 				91A21A1B1ED5F01F009FF41F /* SearchViewModelTests.swift in Sources */,
 				912C4BC31EDAF3DB00942AA2 /* MockObjects.swift in Sources */,
-				914791CD21532596009B189E /* QuizViewModelTests.swift in Sources */,
 				912C4BC51EDAF43200942AA2 /* ListViewModelTests.swift in Sources */,
 				910C332D1ED4509C0005BFA7 /* RxSwiftWordFriendTests.swift in Sources */,
 				914BABF6217581CA00D16069 /* QuizReactorTests.swift in Sources */,

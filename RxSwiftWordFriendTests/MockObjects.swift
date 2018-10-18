@@ -59,8 +59,14 @@ class MockDictionaryService : DictionaryService {
 
 class MockRandomGenerator: RandomGeneratorProtocol {
     var randomIndex = -1
+    var randomIndex2 = -1
+    var isIndexUsing = false
     
     func getRandomIndex(max: Int) -> Int {
+        guard false == isIndexUsing else {
+            isIndexUsing = false
+            return randomIndex2 }
+        isIndexUsing = true
         return randomIndex
     }
 }
