@@ -34,7 +34,7 @@ class ListViewController: UIViewController {
     
     func bindTitleOfButtonEdit() {
         viewModel?.titleOfButtonEdit.asObservable().subscribe(onNext: { [weak self] value in
-            self?.buttonEdit.setTitle(value, for: UIControlState.normal)
+            self?.buttonEdit.setTitle(value, for: UIControl.State.normal)
         }).disposed(by: disposeBag)
     }
     
@@ -76,13 +76,13 @@ class ListViewController: UIViewController {
                         cell.textLabel?.text = voca.word
                         cell.detailTextLabel?.text = voca.meaning
             }
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
     
     func setupCellOnDelete() {
         self.tableView.rx.itemDeleted.subscribe(onNext: {[weak self] indexPath in
             self?.viewModel?.action.onNext(.deleteItem(index: indexPath.row))
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
     
     @IBAction func buttonEditTapped(_ sender: Any) {

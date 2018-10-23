@@ -313,12 +313,13 @@
 					910C33131ED4509C0005BFA7 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = YEX9K6G97T;
-						LastSwiftMigration = 0830;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 					910C33271ED4509C0005BFA7 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = YEX9K6G97T;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 910C33131ED4509C0005BFA7;
 					};
@@ -700,7 +701,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RxSwiftWordFriend-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -718,7 +719,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.happyCodingCompany.RxSwiftWordFriend;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RxSwiftWordFriend-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -733,7 +734,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.happyCodingCompany.RxSwiftWordFriendTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RxSwiftWordFriend.app/RxSwiftWordFriend";
 			};
 			name = Debug;
@@ -749,7 +750,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.happyCodingCompany.RxSwiftWordFriendTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RxSwiftWordFriend.app/RxSwiftWordFriend";
 			};
 			name = Release;
