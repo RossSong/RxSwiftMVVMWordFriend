@@ -20,6 +20,7 @@ struct Service {
     
     func register() {
         container.register(DataManager.self) { _ in RealmDataManager.shared }
+        container.register(RandomGeneratorProtocol.self) { _ in RandomGenerator() }
         container.register(QuizManagerProtocol.self) { _ in QuizManager()}
     }
     

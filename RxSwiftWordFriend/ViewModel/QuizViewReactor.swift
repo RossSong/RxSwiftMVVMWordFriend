@@ -1,5 +1,5 @@
 //
-//  QuizReactor.swift
+//  QuizViewReactor.swift
 //  RxSwiftWordFriend
 //
 //  Created by Ross on 2018. 10. 15..
@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import ReactorKit
 
-class QuizReactor: Reactor {
+class QuizViewReactor: Reactor {
     var quizManager: QuizManagerProtocol?
     var initialState = State()
     
@@ -42,7 +42,7 @@ class QuizReactor: Reactor {
         setupDependencies()
     }
     
-    func mutate(action: QuizReactor.Action) -> Observable<QuizReactor.Mutation> {
+    func mutate(action: QuizViewReactor.Action) -> Observable<QuizViewReactor.Mutation> {
         switch action {
         case .load:
             return Observable.just(Mutation.loadWords)
@@ -56,9 +56,8 @@ class QuizReactor: Reactor {
     }
     
     func handleLoadWords(_ state: State) -> State {
-        let state = state
         quizManager?.load()
-        return state
+        return handlePeekAWord(state)
     }
     
     func handlePeekAWord(_ state: State) -> State {

@@ -140,6 +140,12 @@ class SearchViewController: UIViewController {
             self?.performSegue(withIdentifier: "showQuiz", sender: nil)
         }).disposed(by: disposeBag)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard "showQuiz" == segue.identifier else { return }
+        guard let viewController = segue.destination as? QuizViewController else { return }
+        viewController.reactor = QuizViewReactor()
+    }
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         guard let viewModel = self.searchViewModel else { return false }

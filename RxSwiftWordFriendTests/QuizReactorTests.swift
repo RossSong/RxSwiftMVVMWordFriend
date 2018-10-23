@@ -16,7 +16,7 @@ class QuizReactorTests: QuickSpec {
     override func spec() {
         describe("QuizView") {
             
-            var reactor: QuizReactor?
+            var reactor: QuizViewReactor?
             var disposeBag: DisposeBag?
             var mockDataManager: MockDataManager?
             var mockRandomGenerator: MockRandomGenerator?
@@ -29,7 +29,7 @@ class QuizReactorTests: QuickSpec {
                 Service.shared.container.register(RandomGeneratorProtocol.self) { _ in mockRandomGenerator! }
                 
                 disposeBag = DisposeBag()
-                reactor = QuizReactor()
+                reactor = QuizViewReactor()
             }
             
             func loadData() {
@@ -58,7 +58,7 @@ class QuizReactorTests: QuickSpec {
                 }
                 
                 it("should show one word randomly from loaded words") {
-                    let result = BehaviorRelay<QuizReactor.State>(value: QuizReactor.State())
+                    let result = BehaviorRelay<QuizViewReactor.State>(value: QuizViewReactor.State())
                     reactor?.state.bind(to: result).disposed(by: disposeBag!)
                     loadData()
                     //expect..
@@ -74,7 +74,7 @@ class QuizReactorTests: QuickSpec {
                             mockRandomGenerator?.isIndexUsing = false
                             mockRandomGenerator?.randomIndex = 1
                             mockRandomGenerator?.randomIndex2 = 0
-                            let result = BehaviorRelay<QuizReactor.State>(value: QuizReactor.State())
+                            let result = BehaviorRelay<QuizViewReactor.State>(value: QuizViewReactor.State())
                             reactor?.state.bind(to: result).disposed(by: disposeBag!)
                             reactor?.action.onNext(.peek)
                             reactor?.action.onNext(.selectAnswer(index: 0))
@@ -88,7 +88,7 @@ class QuizReactorTests: QuickSpec {
                             mockRandomGenerator?.isIndexUsing = false
                             mockRandomGenerator?.randomIndex = 0
                             mockRandomGenerator?.randomIndex2 = 1
-                            let result = BehaviorRelay<QuizReactor.State>(value: QuizReactor.State())
+                            let result = BehaviorRelay<QuizViewReactor.State>(value: QuizViewReactor.State())
                             reactor?.state.bind(to: result).disposed(by: disposeBag!)
                             reactor?.action.onNext(.peek)
                             reactor?.action.onNext(.selectAnswer(index: 0))
@@ -106,7 +106,7 @@ class QuizReactorTests: QuickSpec {
                     it("should load another word from loaded words") {
                         mockRandomGenerator?.randomIndex = 1
                         mockRandomGenerator?.randomIndex2 = 0
-                        let result = BehaviorRelay<QuizReactor.State>(value: QuizReactor.State())
+                        let result = BehaviorRelay<QuizViewReactor.State>(value: QuizViewReactor.State())
                         reactor?.state.bind(to: result).disposed(by: disposeBag!)
                         reactor?.action.onNext(.confirmPopup)
                         expect(result.value.shouldShowPopupForCongratulation).to(beFalse())

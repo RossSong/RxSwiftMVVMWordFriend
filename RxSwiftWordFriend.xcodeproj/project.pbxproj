@@ -36,7 +36,7 @@
 		91A21A191ED5E441009FF41F /* GoogleImageSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A21A171ED5E441009FF41F /* GoogleImageSearchService.swift */; };
 		91A21A1B1ED5F01F009FF41F /* SearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A21A1A1ED5F01F009FF41F /* SearchViewModelTests.swift */; };
 		91BFB2E32174780A00F329F0 /* RandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BFB2E22174780A00F329F0 /* RandomGenerator.swift */; };
-		91BFB2E521748A0200F329F0 /* QuizReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BFB2E421748A0200F329F0 /* QuizReactor.swift */; };
+		91BFB2E521748A0200F329F0 /* QuizViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BFB2E421748A0200F329F0 /* QuizViewReactor.swift */; };
 		C95B38BFB10FA557707B28AC /* Pods_RxSwiftWordFriend.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5668AD30FAD42CAF1BC825C1 /* Pods_RxSwiftWordFriend.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,7 +92,7 @@
 		91A21A171ED5E441009FF41F /* GoogleImageSearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleImageSearchService.swift; path = Service/GoogleImageSearchService.swift; sourceTree = "<group>"; };
 		91A21A1A1ED5F01F009FF41F /* SearchViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModelTests.swift; sourceTree = "<group>"; };
 		91BFB2E22174780A00F329F0 /* RandomGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RandomGenerator.swift; path = Helper/RandomGenerator.swift; sourceTree = "<group>"; };
-		91BFB2E421748A0200F329F0 /* QuizReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuizReactor.swift; path = ViewModel/QuizReactor.swift; sourceTree = "<group>"; };
+		91BFB2E421748A0200F329F0 /* QuizViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuizViewReactor.swift; path = ViewModel/QuizViewReactor.swift; sourceTree = "<group>"; };
 		BCD4DC6F21DAE52F278DDB37 /* Pods-RxSwiftWordFriendTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwiftWordFriendTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxSwiftWordFriendTests/Pods-RxSwiftWordFriendTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EE9A67907A9A52DC922CE9C4 /* Pods-RxSwiftWordFriend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwiftWordFriend.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxSwiftWordFriend/Pods-RxSwiftWordFriend.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -195,7 +195,7 @@
 			children = (
 				91A219F41ED5BD55009FF41F /* ListViewModel.swift */,
 				91A219EE1ED5BCF7009FF41F /* SearchViewModel.swift */,
-				91BFB2E421748A0200F329F0 /* QuizReactor.swift */,
+				91BFB2E421748A0200F329F0 /* QuizViewReactor.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -400,9 +400,32 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RxSwiftWordFriendTests/Pods-RxSwiftWordFriendTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactorKit/ReactorKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactorKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -415,9 +438,28 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RxSwiftWordFriend/Pods-RxSwiftWordFriend-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactorKit/ReactorKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactorKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -430,13 +472,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RxSwiftWordFriend-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F2A738C6F55252BB38881515 /* [CP] Check Pods Manifest.lock */ = {
@@ -445,13 +490,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RxSwiftWordFriendTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -474,7 +522,7 @@
 				912396E41ED69F5E0068F374 /* DataManager.swift in Sources */,
 				91A21A0B1ED5DFAF009FF41F /* XPathQuery.m in Sources */,
 				91A21A181ED5E441009FF41F /* ImageSearchService.swift in Sources */,
-				91BFB2E521748A0200F329F0 /* QuizReactor.swift in Sources */,
+				91BFB2E521748A0200F329F0 /* QuizViewReactor.swift in Sources */,
 				91A21A091ED5DFAF009FF41F /* TFHpple.m in Sources */,
 				91A219F91ED5BDCE009FF41F /* DaumDictionaryService.swift in Sources */,
 				91A219FC1ED5D9C5009FF41F /* DictionaryService.swift in Sources */,
