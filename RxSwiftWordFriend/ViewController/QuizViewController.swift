@@ -101,7 +101,9 @@ class QuizViewController: UIViewController, StoryboardView {
         
         let alert = UIAlertController(title: "Quiz", message:message , preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: titleForAction, style: style, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: { [weak self] in
+            self?.reactor?.action.onNext(.peek)
+        })
     }
     
     func bindShouldShowPopupForCongratulation(_ reactor: QuizViewReactor) {
